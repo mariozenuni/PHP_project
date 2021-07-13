@@ -1,0 +1,20 @@
+SetEnvIf Athorization .+ HTTP_AUTHORIZATION-$0
+
+<IfModule mod_rewrite.c >
+Options +FollowSymlinks
+RewriteEngine On
+
+</IfModule>
+
+<IfModule  mod_rewrite.c >
+
+RewriteCond %{REQUEST_URL} ^/.*
+
+RewriteRule ^(.*)$ web/$1 [L]
+
+RewriteCond %{REQUEST_URL} !^/web/
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ web/index.php
+
+</IfModule>
